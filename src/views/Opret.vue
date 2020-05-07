@@ -5,10 +5,24 @@
   <h3>Joke-navn</h3>
       <input type="text" v-model="post.name" placeholder="Indtast jokens navn" required>
         <h3>Indtast din joke</h3>
-<input type="text" v-model="post.description" placeholder="Indtast selve joken" required>
+<textarea type="text" v-model="post.description" placeholder="Indtast selve joken" required></textarea>
+<h3>Vælg kategori</h3>
+<select v-model="post.category">
+  <option disabled value="">Vælg venligst en kategori</option>
+  <option>Alle børnene</option>
+  <option>Københavner-jokes</option>
+  <option>Aarhusianer-jokes</option>
+  <option>Far Jokes</option>
+  <option>Banke-banke på</option>
+  <option>Diverse</option>
+</select>
         <h3>Vælg billede til din joke</h3>
       <input type="file" ref="fileInput" accept="image/*" v-on:change="previewImage">
       <button class="choose-image" type="button" v-on:click="triggerChooseImg">Vælg et billede</button>
+
+        <h3>Dit navn</h3>
+<input type="text" v-model="post.uploadName" placeholder="Indtast dit navn" required>
+
       <div>
         <img :src="post.image" class="image-preview">
       </div>
@@ -27,6 +41,8 @@ export default {
       post: {
         name: '',
         description: '',
+        categori: '',
+        uploadName: '',
         image: null
       }
     }
@@ -75,7 +91,7 @@ button.choose-image {
   text-align: left;
 }
 
-input {
+input, textarea, select {
   margin: 1em auto;
   width: 100%;
   max-width: 300px;
