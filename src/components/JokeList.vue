@@ -1,7 +1,7 @@
 <template>
 <section>
      <div class="search-wrapper">
-       <select v-model="selected">
+       <select>
            <option disabled value="">Vælg kategori</option>
   <option>Alle børnene</option>
   <option>Københavner-jokes</option>
@@ -16,11 +16,20 @@
     <article v-for="post in filteredPosts" :key="post.id">
       <img :src="post.image" alt />
       <div id="flexbox">
-        <p v-on:click="deleteUser('{{post.id}}')">Slet joke</p>
+        <p v-on:click="deleteJoke(post.id)" :key="post.id">Slet joke</p>
         <p>Rediger joke</p></div>
       <h3>{{post.name}}</h3>
-      <p>{{post.description}}</p>
-      <p>{{post.id}}</p>
+      <p class="category">{{post.category}}</p>
+      <p class="joke">{{post.description}}</p>
+      <div class="details">
+        <img :src="post.image" alt />
+      <div id="flexbox">
+        <p v-on:click="deleteJoke(this.post.id)" :key="post.id">Slet joke</p>
+        <p>Rediger joke</p></div>
+      <h3>{{post.name}}</h3>
+      <p class="category">{{post.category}}</p>
+      <p class="joke">{{post.description}}</p>
+      </div>
     </article>
   </div>
 </section>
@@ -33,21 +42,22 @@ export default {
     return {
       posts: [],
       search: '',
-      selected: '',
       id: ''
     }
   },
   firestore: {
     posts: postRef
   },
+  methods: {
+    deleteJoke (id) {
+      postRef.doc(id).delete()
+    }
+  },
   computed: {
     filteredPosts () {
       return this.posts.filter((post) => {
         return post.name.toLowerCase().match(this.search.toLowerCase())
       })
-    },
-    deleteJoke (id) {
-      return this.id.delete
     }
   }
 }
@@ -75,6 +85,18 @@ export default {
 .grid-container > article {
   text-align: center;
   padding: 10px;
+}
+
+.joke {
+  max-width: 300px;
+  margin: auto;
+   margin-top: -15px;
+}
+
+.category {
+  padding-bottom: 10px;
+  margin-top: -25px;
+  font-size: 0.7em;
 }
 
 .grid-container > article img {
@@ -118,14 +140,17 @@ input[type="file"] {
   position:relative;
   background-color: white;
   opacity: 0.8;
+  max-width: 300px;
+  margin: auto;
   font-size: 0.7em;
   margin-top: -35px;
-  justify-content: center;
+  justify-content: space-around;
 }
 
-#flexbox p {
-  padding-left: 15px;
-  padding-right: 15px;
+.details {
+  background-color: #1989b2;
+  padding: 15px;
+  position: absolute;
 }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="Create">
+  <div class="update">
     <h1>OPRET JOKE</h1>
 <form>
   <h3>Joke-navn</h3>
@@ -26,7 +26,7 @@
       <div>
         <img :src="post.image" class="image-preview">
       </div>
-      <button type="button" v-on:click="createPost">Indsend joke</button>
+      <button type="button" v-on:click="createPost">Opdater joke</button>
     </form>
 
   </div>
