@@ -17,7 +17,7 @@
       <img :src="post.image" alt />
       <div id="flexbox">
         <p v-on:click="deleteJoke(post.id)" :key="post.id">Slet joke</p>
-        <p v-on:click="display = !display">Rediger joke</p>
+        <p v-on:click="display = !display" :key="post">Rediger joke</p>
         </div>
       <h3>{{post.name}}</h3>
       <p class="category">{{post.category}}</p>
