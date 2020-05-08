@@ -14,6 +14,11 @@ const routes = [
     path: '/opret',
     name: 'opret',
     component: () => import('../views/Opret.vue')
+  },
+  {
+    path: '/update',
+    name: 'update',
+    component: () => import('../views/Update.vue')
   }
 ]
 

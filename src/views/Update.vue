@@ -1,9 +1,9 @@
 <template>
   <div class="update">
-    <h1>OPRET JOKE</h1>
+    <h1>OPDATER JOKE</h1>
 <form>
   <h3>Joke-navn</h3>
-      <input type="text" v-model="post.name" placeholder="Indtast jokens navn" required>
+      <input type="text" id="nameUpdateInput" v-model="post.name" placeholder="Indtast jokens navn" required>
         <h3>Indtast din joke</h3>
 <textarea type="text" v-model="post.description" placeholder="Indtast selve joken" required></textarea>
 <h3>Vælg kategori</h3>
@@ -26,23 +26,23 @@
       <div>
         <img :src="post.image" class="image-preview">
       </div>
-      <button type="button" v-on:click="createPost">Opdater joke</button>
+      <button type="button" v-on:click="updateThePost(id, name, desciption, category, image, uploadName)">Opdater joke</button>
     </form>
-
+<p>{{post.id}}</p>
   </div>
 </template>
 
 <script>
 import { postRef } from '../firebase-db'
 export default {
-  name: 'Opret',
+  name: 'Edit',
   data () {
     return {
       post: {
         name: '',
-        description: '',
-        categori: '',
-        uploadName: '',
+        description: 'post.description',
+        categori: 'post.category',
+        uploadName: 'post.uploadName',
         image: null
       }
     }
@@ -59,8 +59,8 @@ export default {
       }
       fileReader.readAsDataURL(imageFile)
     },
-    createPost () {
-      postRef.add(this.post)
+    updateThePost (id) {
+      postRef.set(this.post)
       this.$router.push('/')
     }
   }
