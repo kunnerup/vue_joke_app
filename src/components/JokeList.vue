@@ -1,15 +1,6 @@
 <template>
 <section>
      <div class="search-wrapper">
-       <select>
-      <option value="" disabled selected>Vælg kategori</option>
-  <option>Alle børnene</option>
-  <option>Københavner-jokes</option>
-  <option>Aarhusianer-jokes</option>
-  <option>Far Jokes</option>
-  <option>Banke-banke på</option>
-  <option>Diverse</option>
-       </select>
     <input type="text" v-model="search" placeholder="Søg efter jokes.."/>
   </div>
   <div class="grid-container">
@@ -20,7 +11,7 @@
       <img :src="post.image" alt />
                </router-link>
       <div id="flexbox">
-        <p v-on:click="deleteJoke(post.id)" :key="post.id">Slet joke</p>
+        <p v-on:click="deleteJoke(post.id)">Slet joke</p>
         <router-link
           :to="{name: 'update', params: {post: post} }">
         <p>Rediger joke</p>
@@ -62,7 +53,9 @@ export default {
   },
   methods: {
     deleteJoke (id) {
-      postRef.doc(id).delete()
+      if (confirm('Ønsker du virkelig at slette denne joke?')) {
+        postRef.doc(id).delete()
+      }
     },
     triggerChooseImg () {
       this.$refs.fileInput.click()

@@ -28,7 +28,6 @@
 
       <div>
         <img :src="post.image" class="image-preview">
-        <p>{{post.name}}</p>
       </div>
       <button type="button" v-on:click="updatePost(post.id, post.name, post.description, post.category, post.uploadName, post.image)">Opdatér Joke</button>
     </form>
