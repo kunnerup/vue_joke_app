@@ -75,18 +75,6 @@ export default {
       }
       fileReader.readAsDataURL(imageFile)
     },
-    updatePost (id, name, description, category, uploadName, image) {
-      postRef.doc(id).set({
-        name,
-        description,
-        category,
-        uploadName,
-        image
-      })
-    },
-    toggleItem: function () {
-      this.toggled = !this.toggled
-    },
     incrementCounter: function () {
       this.count += 1
     }
@@ -129,6 +117,7 @@ export default {
   max-width: 300px;
   margin: auto;
    margin-top: -15px;
+   white-space: pre-wrap;
 }
 
 .category {

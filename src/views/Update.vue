@@ -38,7 +38,6 @@
 <script>
 import { postRef } from '../firebase-db'
 export default {
-  name: 'Edit',
   props: {
     post: Object
   },
