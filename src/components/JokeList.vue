@@ -2,7 +2,7 @@
 <section>
      <div class="search-wrapper">
        <select>
-           <option disabled value="">Vælg kategori</option>
+      <option value="" disabled selected>Vælg kategori</option>
   <option>Alle børnene</option>
   <option>Københavner-jokes</option>
   <option>Aarhusianer-jokes</option>
@@ -14,12 +14,14 @@
   </div>
   <div class="grid-container">
     <article v-for="post in filteredPosts" :key="post.id">
+               <router-link
+          :key="post.id"
+          :to="{name: 'detail', params: {post: post} }">
       <img :src="post.image" alt />
+               </router-link>
       <div id="flexbox">
         <p v-on:click="deleteJoke(post.id)" :key="post.id">Slet joke</p>
         <router-link
-          v-for="post in posts"
-          :key="post.id"
           :to="{name: 'update', params: {post: post} }">
         <p>Rediger joke</p>
           </router-link>
@@ -27,9 +29,13 @@
        <p>❤ {{count}}</p>
         </div>
         </div>
+         <router-link
+          :key="post.id"
+          :to="{name: 'detail', params: {post: post} }">
       <h3>{{post.name}}</h3>
       <p class="category">{{post.category}}</p>
       <p class="joke">{{post.description}}</p>
+      </router-link>
     </article>
   </div>
 </section>
@@ -41,14 +47,12 @@ export default {
   data () {
     return {
       posts: [],
-      updatedJoke: {
-        id: '',
-        name: '',
-        description: '',
-        category: '',
-        uploadName: '',
-        image: ''
-      },
+      id: '',
+      name: '',
+      description: '',
+      category: '',
+      uploadName: '',
+      image: '',
       search: '',
       count: 0
     }
@@ -138,6 +142,11 @@ export default {
   height: 200px;
   width: 100%;
   object-fit:cover;
+  opacity: 0.8;
+}
+
+.grid-container > article img:hover {
+opacity: 1;
 }
 
 .grid-container > article h3 {
@@ -184,9 +193,10 @@ input[type="file"] {
   font-size: 0.7em;
   margin-top: -35px;
   justify-content: space-around;
+  cursor: pointer;
 }
 
-#flexbox a {
+a {
   color: black;
   text-decoration: none;
 }

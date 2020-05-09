@@ -8,7 +8,7 @@
 <textarea type="text" v-model="post.description" placeholder="Indtast selve joken" required></textarea>
 <h3>Vælg kategori</h3>
 <select v-model="post.category">
-  <option disabled>Vælg venligst en kategori</option>
+  <option value="" disabled selected>Vælg kategori</option>
   <option>Alle børnene</option>
   <option>Københavner-jokes</option>
   <option>Aarhusianer-jokes</option>

@@ -1,6 +1,8 @@
 <template>
       <div class="updateInputs" ref="updateInputs">
-        <router-link to="/"><p>X</p></router-link>
+        <router-link to="/">
+<h2 class="backb">🢀TILBAGE</h2>
+        </router-link>
         <h4>OPDATÉR JOKE</h4>
         <form>
   <h3>Joke-navn</h3>
@@ -9,7 +11,7 @@
 <textarea type="text" v-model="post.description" placeholder="Indtast selve joken" required></textarea>
 <h3>Vælg kategori</h3>
 <select v-model="post.category">
-  <option disabled>Vælg venligst en kategori</option>
+  <option value="" disabled selected>Vælg kategori</option>
   <option>Alle børnene</option>
   <option>Københavner-jokes</option>
   <option>Aarhusianer-jokes</option>
@@ -60,6 +62,7 @@ export default {
         uploadName,
         image
       })
+      this.$router.push('/')
     }
   }
 }

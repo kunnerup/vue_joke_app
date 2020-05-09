@@ -20,6 +20,12 @@ const routes = [
     name: 'update',
     component: () => import('../views/Update.vue'),
     props: true
+  },
+  {
+    path: '/detail',
+    name: 'detail',
+    component: () => import('../views/Detail.vue'),
+    props: true
   }
 ]
 
