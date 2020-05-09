@@ -1,14 +1,15 @@
 <template>
-  <div class="update">
-    <h1>OPDATER JOKE</h1>
-<form>
+      <div class="updateInputs" ref="updateInputs">
+        <router-link to="/"><p>X</p></router-link>
+        <h4>OPDATÉR JOKE</h4>
+        <form>
   <h3>Joke-navn</h3>
-      <input type="text" id="nameUpdateInput" v-model="post.name" placeholder="Indtast jokens navn" required>
+      <input type="text" v-model="post.name" placeholder="Indtast jokens navn" required>
         <h3>Indtast din joke</h3>
 <textarea type="text" v-model="post.description" placeholder="Indtast selve joken" required></textarea>
 <h3>Vælg kategori</h3>
 <select v-model="post.category">
-  <option disabled value="">Vælg venligst en kategori</option>
+  <option disabled>Vælg venligst en kategori</option>
   <option>Alle børnene</option>
   <option>Københavner-jokes</option>
   <option>Aarhusianer-jokes</option>
@@ -18,34 +19,26 @@
 </select>
         <h3>Vælg billede til din joke</h3>
       <input type="file" ref="fileInput" accept="image/*" v-on:change="previewImage">
-      <button class="choose-image" type="button" v-on:click="triggerChooseImg">Vælg et billede</button>
+      <button class="choose-image" type="button" v-on:click="triggerChooseImg">Vælg et nyt billede</button>
 
         <h3>Dit navn</h3>
 <input type="text" v-model="post.uploadName" placeholder="Indtast dit navn" required>
 
       <div>
         <img :src="post.image" class="image-preview">
+        <p>{{post.name}}</p>
       </div>
-      <button type="button" v-on:click="updateThePost(id, name, desciption, category, image, uploadName)">Opdater joke</button>
+      <button type="button" v-on:click="updatePost(post.id, post.name, post.description, post.category, post.uploadName, post.image)">Opdatér Joke</button>
     </form>
-<p>{{post.id}}</p>
-  </div>
+        </div>
 </template>
 
 <script>
 import { postRef } from '../firebase-db'
 export default {
   name: 'Edit',
-  data () {
-    return {
-      post: {
-        name: '',
-        description: 'post.description',
-        categori: 'post.category',
-        uploadName: 'post.uploadName',
-        image: null
-      }
-    }
+  props: {
+    post: Object
   },
   methods: {
     triggerChooseImg () {
@@ -59,9 +52,14 @@ export default {
       }
       fileReader.readAsDataURL(imageFile)
     },
-    updateThePost (id) {
-      postRef.set(this.post)
-      this.$router.push('/')
+    updatePost (id, name, description, category, uploadName, image) {
+      postRef.doc(id).set({
+        name,
+        description,
+        category,
+        uploadName,
+        image
+      })
     }
   }
 }
