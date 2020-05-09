@@ -6,7 +6,6 @@
   <div class="grid-container">
     <article v-for="post in filteredPosts" :key="post.id">
                <router-link
-          :key="post.id"
           :to="{name: 'detail', params: {post: post} }">
       <img :src="post.image" alt />
                </router-link>
@@ -16,12 +15,11 @@
           :to="{name: 'update', params: {post: post} }">
         <p>Rediger joke</p>
           </router-link>
-        <div id="setflex" @click="incrementCounter">
+        <div id="setflex" @click="upCounter">
        <p>❤ {{count}}</p>
         </div>
         </div>
          <router-link
-          :key="post.id"
           :to="{name: 'detail', params: {post: post} }">
       <h3>{{post.name}}</h3>
       <p class="category">{{post.category}}</p>
@@ -68,7 +66,7 @@ export default {
       }
       fileReader.readAsDataURL(imageFile)
     },
-    incrementCounter: function () {
+    upCounter: function () {
       this.count += 1
     }
   },
@@ -155,6 +153,7 @@ input, textarea, select {
   box-sizing: border-box;
   display: block;
   border: 1px solid #1989b2;
+  font-size: 14px;
 }
 
 .choose-image{
